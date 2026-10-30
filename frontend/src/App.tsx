@@ -1,12 +1,21 @@
 import { useState, type FormEvent } from 'react';
 import './App.css';
 
+type BlogSection = {
+  id: string;
+  image_url: string | null;
+  extra_images: string[];
+  text: string;
+};
+
 type BlogData = {
   title: string;
   url: string;
   content: string;
   images: string[];
   image_count: number;
+  sections: BlogSection[];
+  section_count: number;
 };
 
 function App() {
@@ -87,41 +96,73 @@ function App() {
         )}
 
         {blogData && (
-          <section style={{ marginTop: 48, textAlign: 'left' }}>
-            <h2>{blogData.title}</h2>
+          <section className="blog-result">
 
-            <p>이미지 {blogData.image_count}개 추출</p>
+            <div className="blog-result__header">
+              <h2>{blogData.title}</h2>
 
-            <div
-              style={{
-                whiteSpace: 'pre-wrap',
-                marginTop: 24,
-                lineHeight: 1.8,
-              }}
-            >
-              {blogData.content}
+              <p>
+                총 {blogData.section_count}개 단락 ·
+                이미지 {blogData.image_count}개
+              </p>
             </div>
 
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: 12,
-                marginTop: 24,
-              }}
-            >
-              {blogData.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`블로그 이미지 ${index + 1}`}
-                  referrerPolicy="no-referrer"
-                  style={{
-                    width: '100%',
-                    borderRadius: 8,
-                  }}
-                />
+            <div className="blog-sections">
+
+              {blogData.sections.map((section) => (
+                <article
+                  key={section.id}
+                  className="blog-section"
+                >
+
+                  <div className="blog-section__header">
+                    <span>{section.id.toUpperCase()}</span>
+
+                    {section.image_url === null && (
+                      <span className="blog-section__intro">
+                        도입부
+                      </span>
+                    )}
+                  </div>
+
+                  {section.image_url && (
+                    <div className="blog-section__image">
+                      <img
+                        src={section.image_url}
+                        alt={`${section.id} 대표 이미지`}
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                  )}
+
+                  {section.extra_images.length > 0 && (
+                    <div className="blog-section__extras">
+
+                      <p>
+                        여분 이미지 {section.extra_images.length}개
+                      </p>
+
+                      <div className="blog-section__extra-grid">
+                        {section.extra_images.map((image, index) => (
+                          <img
+                            key={`${section.id}-${index}`}
+                            src={image}
+                            alt={`여분 이미지 ${index + 1}`}
+                            referrerPolicy="no-referrer"
+                          />
+                        ))}
+                      </div>
+
+                    </div>
+                  )}
+
+                  <div className="blog-section__text">
+                    {section.text || '연결된 텍스트가 없습니다.'}
+                  </div>
+
+                </article>
               ))}
+
             </div>
           </section>
         )}
