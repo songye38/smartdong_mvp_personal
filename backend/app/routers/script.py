@@ -1,8 +1,14 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
+
+# 블로그 크롤링
 from app.services.crawler import scrape_naver_blog
+
+#AI 대본 생성
 from app.services.script_generator import generate_script
+
+#이미지 자동 배분
 from app.services.image_allocator import allocate_images
 
 import logging

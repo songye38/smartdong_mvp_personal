@@ -13,7 +13,7 @@
 | 5 | TTS 음성 생성 | ✅ 완료 | `tts_generator.py` |
 | 6 | 실제 음성 길이 측정 | ✅ 완료 | `tts_generator.py` |
 | 7 | 이미지 전환 시간 계산 | ✅ 완료 | `edit_planner.py` |
-| 8 | **음성과 자막 싱크 맞추기** | ⏳ 예정 | `subtitle_generator.py` |
+| 8 | **음성과 자막 싱크 맞추기** | ✅ 완료 | `subtitle_generator.py` |
 | 9 | **자막을 영상 편집 계획에 통합** | ⏳ 예정 | `edit_planner.py` 수정 |
 | 10 | **MP4 최종 렌더링** | ⏳ 예정 | 렌더링 기능 구현 |
 

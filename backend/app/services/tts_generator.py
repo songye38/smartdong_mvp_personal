@@ -16,7 +16,10 @@ client = OpenAI(
 OUTPUT_DIR = Path(__file__).resolve().parents[2] / "outputs"
 
 
-def generate_tts(scenes: list[dict]) -> dict:
+def generate_tts(
+    scenes: list[dict],
+    job_id: str = None,
+) -> dict:
     """
     쇼츠 대본의 각 장면을 MP3로 변환한다.
     장면별 음성 길이와 전체 길이를 반환한다.
@@ -25,7 +28,7 @@ def generate_tts(scenes: list[dict]) -> dict:
     if not scenes:
         raise ValueError("음성을 생성할 장면이 없습니다.")
 
-    job_id = uuid.uuid4().hex
+    job_id = job_id or uuid.uuid4().hex
     job_dir = OUTPUT_DIR / job_id
     job_dir.mkdir(parents=True, exist_ok=True)
 

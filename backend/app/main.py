@@ -7,6 +7,9 @@ from app.routers.scrape import router as scrape_router
 from app.routers.script import router as script_router
 from app.routers.tts import router as tts_router
 from app.routers.edit_plan import router as edit_plan_router
+from app.routers.subtitles import router as subtitles_router
+from app.routers.render import router as render_router
+from app.routers.generate_video import router as generate_video_router
 
 
 # 1. FastAPI 앱 생성
@@ -37,6 +40,10 @@ app.include_router(scrape_router)
 app.include_router(script_router)
 app.include_router(tts_router)
 app.include_router(edit_plan_router)
+app.include_router(subtitles_router)
+app.include_router(render_router)
+app.include_router(generate_video_router)
+
 
 # 4. 기본 API
 @app.get("/")
